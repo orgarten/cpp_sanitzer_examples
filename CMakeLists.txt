@@ -9,7 +9,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_subdirectory(address_sanitizer)
-
-IF (CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
-    add_subdirectory(memory_sanitizer)
-ENDIF()
+add_subdirectory(memory_sanitizer)
+add_subdirectory(undefined_behavior_sanitizer)
