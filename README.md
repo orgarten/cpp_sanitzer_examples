@@ -61,7 +61,7 @@ Some of the things it catches:
 - devide by zero
 - ... 
 
-UBSan is an absolut must in my eyes and should be part of the development cycle for any code!
+**UBSan is an absolut must in my eyes and should be part of the development cycle for any code!**
 
 More info: 
 - [Oracle Blog](https://blogs.oracle.com/linux/post/improving-application-security-with-undefinedbehaviorsanitizer-ubsan-and-gcc)
