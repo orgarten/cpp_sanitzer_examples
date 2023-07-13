@@ -7,9 +7,8 @@ The CMake configuration is rather small to focus on setting up the sanitizers.
 I would generally advise everyone to run their projects with sanitizers to minimize errors that might not happen all 
 the time. C++ has lot of ways to blow up your application and reducing the surface of error is always a good idea anyway.
 
-!!! note
-   
-    I also suggest to enable all warnings and also enable errors as warning with -Werror to decrease the amount of bugs.
+##### note
+I also suggest to enable all warnings and also enable errors as warning with -Werror to decrease the amount of bugs.
 
 The support for sanitizers seems to be much better for clang, therefore I would suggest running the sanitizers with clang
 and if deemed necessary with GCC, too. 
@@ -30,10 +29,9 @@ There is support for some more classes of bugs, but they might be experimental (
 
 If an error is detected the program exits with a non-zero code which is what we want to have it run in a CI/CD.
 
-!!! warning
-    
-    ASAN exits on the first error. If multiple errors are in the code you will need to run it multiple times. This might
-    feel annoying but it's for the best. 
+##### warning
+ASAN exits on the first error. If multiple errors are in the code you will need to run it multiple times. This might
+feel annoying but it's for the best. 
 
 More information: [llvm docs](https://clang.llvm.org/docs/AddressSanitizer.html)
 
