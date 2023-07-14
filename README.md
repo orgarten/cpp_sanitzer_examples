@@ -21,6 +21,12 @@ If not run locally, have them run in a CI for PRs.
 One of the downsides of sanitizers is that the error messages are still relatively cryptic, especially compared to the 
 ones the Rust compiler gives you.
 
+### Build
+Run the following `shell cmake --preset=<preset>` to generate the build files, where preset can be any
+of the following: `ci-ASAN`, `ci-UBSAN`, `ci-MemSAN`, `ci-ThreadSAN`.
+
+To build the project run `shell cmake --build --preset <preset>` with the same preset options as before.
+
 ### ASAN
 The address sanitizer (short ASAN) finds typical memory bugs such as
 

@@ -1,0 +1,121 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "ci-base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}"
+    },
+    {
+      "name": "unixlike-gcc",
+      "inherits": "ci-base",
+      "description": "GCC build on unixlike systems.",
+      "displayName": "GCC debug",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++"
+      }
+    },
+    {
+      "name": "unixlike-clang",
+      "inherits": "ci-base",
+      "description": "clang build on unixlike systems.",
+      "displayName": "clang debug",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++"
+      }
+    },
+    {
+      "name": "ci-sanitizer-base",
+      "inherits": "ci-base",
+      "description": "Base configuration for sanitizer setup, mainly setting compiler to clang",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++"
+      }
+    },
+    {
+      "name": "ci-ASAN",
+      "inherits": ["ci-sanitizer-base"],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Sanitize",
+        "CMAKE_CXX_FLAGS_SANITIZE": "-g -fsanitize=address -fno-omit-frame-pointer -fno-common"
+      }
+    },
+    {
+      "name": "ci-UBSAN",
+      "inherits": ["ci-sanitizer-base"],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Sanitize",
+        "CMAKE_CXX_FLAGS_SANITIZE": "-g -fsanitize=undefined,float-divide-by-zero,unsigned-integer-overflow,local-bounds,implicit-conversion -fno-omit-frame-pointer -fno-common"
+      }
+    },
+    {
+      "name": "ci-ThreadSAN",
+      "inherits": ["ci-sanitizer-base"],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Sanitize",
+        "CMAKE_CXX_FLAGS_SANITIZE": "-g -fsanitize=thread -fno-omit-frame-pointer -fno-common"
+      }
+    },
+    {
+      "name": "ci-MemSAN",
+      "inherits": ["ci-sanitizer-base"],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Sanitize",
+        "CMAKE_CXX_FLAGS_SANITIZE": "-g -fsanitize=memory -fno-omit-frame-pointer -fno-common"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "unixlike-debug-gcc",
+      "configurePreset": "unixlike-gcc",
+      "configuration": "Debug"
+    },
+    {
+      "name": "unixlike-release-gcc",
+      "configurePreset": "unixlike-gcc",
+      "configuration": "Release"
+    },
+    {
+      "name": "unixlike-debug-clang",
+      "configurePreset": "unixlike-clang",
+      "configuration": "Debug"
+    },
+    {
+      "name": "unixlike-release-clang",
+      "configurePreset": "unixlike-clang",
+      "configuration": "Release"
+    },
+    {
+      "name": "ci-ASAN",
+      "configurePreset": "ci-ASAN",
+      "configuration": "Debug"
+    },
+    {
+      "name": "ci-UBSAN",
+      "configurePreset": "ci-UBSAN",
+      "configuration": "Debug"
+    },
+    {
+      "name": "ci-ThreadSAN",
+      "configurePreset": "ci-ThreadSAN",
+      "configuration": "Debug"
+    },
+    {
+      "name": "ci-MemSAN",
+      "configurePreset": "ci-MemSAN",
+      "configuration": "Debug"
+    }
+  ]
+}
